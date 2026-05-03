@@ -540,6 +540,19 @@ function attachListeners() {
     updateLanguage(state.lang);
   });
 
+  const appHeader = document.getElementById('app-header');
+  const controlsContainer = document.getElementById('controls-container');
+  const toggleIcon = document.getElementById('mobile-toggle-icon');
+  
+  if (appHeader && controlsContainer && toggleIcon) {
+    appHeader.addEventListener('click', () => {
+      if (window.innerWidth <= 768) {
+        controlsContainer.classList.toggle('collapsed-mobile');
+        toggleIcon.classList.toggle('open');
+      }
+    });
+  }
+
   window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();

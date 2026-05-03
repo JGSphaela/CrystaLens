@@ -59,13 +59,17 @@
         </div>
       </div>
 
-      <header class="glass-panel">
+      <header id="app-header" class="glass-panel">
         <div class="header-title">
           <h1 data-i18n="appTitle">CrystaLens</h1>
           <p data-i18n="appSubtitle">Interactive 3D Miller Index & Crystallography Viewer</p>
         </div>
+        <svg id="mobile-toggle-icon" class="mobile-only" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
       </header>
 
+      <div id="controls-container" class="collapsed-mobile">
       <div class="controls glass-panel">
         <div class="section-title" data-i18n="sectionIndices">Indices</div>
         
@@ -144,6 +148,7 @@
           <label for="toggle-sweep" data-i18n="sweepAnim">Plane Sweep Animation</label>
           <input type="checkbox" id="toggle-sweep">
         </div>
+      </div>
       </div>
     </div>
 

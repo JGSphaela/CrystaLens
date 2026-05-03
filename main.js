@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { translations } from './translations.js';
 
 // --- State ---
 const state = {
@@ -10,7 +11,8 @@ const state = {
   lattice: 'none',
   showAtoms: true,
   sweep: false,
-  savedEntries: [] // Array of {h, k, l, notation, color, id}
+  savedEntries: [], // Array of {h, k, l, notation, color, id}
+  lang: 'en'
 };
 
 const PALETTE = [
@@ -532,6 +534,12 @@ function attachListeners() {
     if(!state.sweep) updateMillerRender();
   });
 
+  document.getElementById('lang-selector').addEventListener('change', (e) => {
+    state.lang = e.target.value;
+    localStorage.setItem('crystalens-lang', state.lang);
+    updateLanguage(state.lang);
+  });
+
   window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
@@ -539,6 +547,45 @@ function attachListeners() {
   });
 }
 
+// --- i18n Logic ---
+function initLanguage() {
+  const savedLang = localStorage.getItem('crystalens-lang');
+  if (savedLang && translations[savedLang]) {
+    state.lang = savedLang;
+  } else {
+    const browserLang = navigator.language.split('-')[0];
+    state.lang = translations[browserLang] ? browserLang : 'en';
+  }
+  
+  const selector = document.getElementById('lang-selector');
+  if (selector) selector.value = state.lang;
+  
+  updateLanguage(state.lang);
+}
+
+function updateLanguage(lang) {
+  const t = translations[lang];
+  if (!t) return;
+  
+  document.documentElement.lang = lang;
+  
+  document.title = t.title;
+  const metaTitle = document.querySelector('meta[name="title"]');
+  if (metaTitle) metaTitle.setAttribute('content', t.title);
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) metaDesc.setAttribute('content', t.description);
+  const metaKeywords = document.querySelector('meta[name="keywords"]');
+  if (metaKeywords) metaKeywords.setAttribute('content', t.keywords);
+  
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) {
+      el.textContent = t[key];
+    }
+  });
+}
+
+initLanguage();
 attachListeners();
 updateUI();
 renderEntriesList();

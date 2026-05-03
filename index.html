@@ -38,21 +38,44 @@
 
     <!-- UI Overlay -->
     <div id="ui-container">
+      <div class="top-right-controls">
+        <div class="lang-selector-wrapper glass-panel-sm">
+          <svg class="globe-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <select id="lang-selector" class="lang-selector">
+            <option value="en">English</option>
+            <option value="ja">日本語</option>
+            <option value="zh">中文</option>
+            <option value="es">Español</option>
+            <option value="hi">हिन्दी</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+            <option value="pt">Português</option>
+            <option value="ar">العربية</option>
+          </select>
+        </div>
+      </div>
+
       <header class="glass-panel">
-        <h1>CrystaLens</h1>
-        <p>Interactive 3D Miller Index & Crystallography Viewer</p>
+        <div class="header-title">
+          <h1 data-i18n="appTitle">CrystaLens</h1>
+          <p data-i18n="appSubtitle">Interactive 3D Miller Index & Crystallography Viewer</p>
+        </div>
       </header>
 
       <div class="controls glass-panel">
-        <div class="section-title">Indices</div>
+        <div class="section-title" data-i18n="sectionIndices">Indices</div>
         
         <div class="control-group">
-          <label for="notation-type">Notation Type</label>
+          <label for="notation-type" data-i18n="notationType">Notation Type</label>
           <select id="notation-type">
-            <option value="plane">(hkl) - Specific Plane</option>
-            <option value="direction">[uvw] - Specific Direction</option>
-            <option value="plane-family">{hkl} - Family of Planes</option>
-            <option value="direction-family">&lt;uvw&gt; - Family of Directions</option>
+            <option value="plane" data-i18n="optPlane">(hkl) - Specific Plane</option>
+            <option value="direction" data-i18n="optDir">[uvw] - Specific Direction</option>
+            <option value="plane-family" data-i18n="optPlaneFam">{hkl} - Family of Planes</option>
+            <option value="direction-family" data-i18n="optDirFam">&lt;uvw&gt; - Family of Directions</option>
           </select>
         </div>
 
@@ -83,42 +106,42 @@
           </div>
         </div>
 
-        <button id="add-entry-btn" class="action-btn">Add to View +</button>
+        <button id="add-entry-btn" class="action-btn" data-i18n="btnAdd">Add to View +</button>
 
         <div id="saved-entries-list" class="saved-entries"></div>
 
         <div class="math-panel">
           <div class="math-row">
-            <span>Intercepts (x, y, z):</span>
+            <span data-i18n="intercepts">Intercepts (x, y, z):</span>
             <span id="intercepts-val" class="mono">1, 1, 1</span>
           </div>
           <div class="math-row">
-            <span>Interplanar Spacing (d):</span>
+            <span data-i18n="dSpacing">Interplanar Spacing (d):</span>
             <span id="d-spacing-val" class="mono">0.577 a</span>
           </div>
         </div>
       </div>
 
       <div class="settings glass-panel">
-        <div class="section-title">Lattice & View</div>
+        <div class="section-title" data-i18n="sectionLattice">Lattice & View</div>
         
         <div class="control-group">
-          <label for="lattice-type">Lattice Type</label>
+          <label for="lattice-type" data-i18n="latticeType">Lattice Type</label>
           <select id="lattice-type">
-            <option value="none">Empty Unit Cell</option>
-            <option value="sc">Simple Cubic (SC)</option>
-            <option value="bcc">Body-Centered Cubic (BCC)</option>
-            <option value="fcc">Face-Centered Cubic (FCC)</option>
+            <option value="none" data-i18n="optNone">Empty Unit Cell</option>
+            <option value="sc" data-i18n="optSC">Simple Cubic (SC)</option>
+            <option value="bcc" data-i18n="optBCC">Body-Centered Cubic (BCC)</option>
+            <option value="fcc" data-i18n="optFCC">Face-Centered Cubic (FCC)</option>
           </select>
         </div>
 
         <div class="control-group toggle-group">
-          <label for="toggle-atoms">Show Atoms</label>
+          <label for="toggle-atoms" data-i18n="showAtoms">Show Atoms</label>
           <input type="checkbox" id="toggle-atoms" checked>
         </div>
 
         <div class="control-group toggle-group">
-          <label for="toggle-sweep">Plane Sweep Animation</label>
+          <label for="toggle-sweep" data-i18n="sweepAnim">Plane Sweep Animation</label>
           <input type="checkbox" id="toggle-sweep">
         </div>
       </div>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Primary Meta Tags & SEO -->
+    <title>CrystaLens | Interactive 3D Miller Index Viewer</title>
+    <meta name="title" content="CrystaLens | Interactive 3D Miller Index Viewer" />
+    <meta name="description" content="A modern, interactive 3D web application for visualizing crystallographic Miller indices, planes, and directions in cubic unit cells." />
+    <meta name="keywords" content="Miller index, crystallography, 3D visualization, unit cell, crystal planes, material science, physics, interactive educational tool" />
+    <meta name="author" content="sph" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="CrystaLens | 3D Miller Index Viewer" />
+    <meta property="og:description" content="Explore crystal structures, Miller indices, and families of planes in an interactive 3D environment." />
+    <meta property="og:image" content="./logo.png" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="CrystaLens | 3D Miller Index Viewer" />
+    <meta property="twitter:description" content="Explore crystal structures, Miller indices, and families of planes in an interactive 3D environment." />
+    <meta property="twitter:image" content="./logo.png" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./logo.png" />
+
+    <!-- Modern Font: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <!-- 3D Canvas Container -->
+    <div id="canvas-container"></div>
+
+    <!-- UI Overlay -->
+    <div id="ui-container">
+      <header class="glass-panel">
+        <h1>CrystaLens</h1>
+        <p>Interactive 3D Miller Index & Crystallography Viewer</p>
+      </header>
+
+      <div class="controls glass-panel">
+        <div class="section-title">Indices</div>
+        
+        <div class="control-group">
+          <label for="notation-type">Notation Type</label>
+          <select id="notation-type">
+            <option value="plane">(hkl) - Specific Plane</option>
+            <option value="direction">[uvw] - Specific Direction</option>
+            <option value="plane-family">{hkl} - Family of Planes</option>
+            <option value="direction-family">&lt;uvw&gt; - Family of Directions</option>
+          </select>
+        </div>
+
+        <div class="miller-inputs">
+          <div class="input-block">
+            <label>h</label>
+            <div class="number-control">
+              <button id="h-dec" class="icon-btn">-</button>
+              <span id="h-val" class="mono">1</span>
+              <button id="h-inc" class="icon-btn">+</button>
+            </div>
+          </div>
+          <div class="input-block">
+            <label>k</label>
+            <div class="number-control">
+              <button id="k-dec" class="icon-btn">-</button>
+              <span id="k-val" class="mono">1</span>
+              <button id="k-inc" class="icon-btn">+</button>
+            </div>
+          </div>
+          <div class="input-block">
+            <label>l</label>
+            <div class="number-control">
+              <button id="l-dec" class="icon-btn">-</button>
+              <span id="l-val" class="mono">1</span>
+              <button id="l-inc" class="icon-btn">+</button>
+            </div>
+          </div>
+        </div>
+
+        <button id="add-entry-btn" class="action-btn">Add to View +</button>
+
+        <div id="saved-entries-list" class="saved-entries"></div>
+
+        <div class="math-panel">
+          <div class="math-row">
+            <span>Intercepts (x, y, z):</span>
+            <span id="intercepts-val" class="mono">1, 1, 1</span>
+          </div>
+          <div class="math-row">
+            <span>Interplanar Spacing (d):</span>
+            <span id="d-spacing-val" class="mono">0.577 a</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings glass-panel">
+        <div class="section-title">Lattice & View</div>
+        
+        <div class="control-group">
+          <label for="lattice-type">Lattice Type</label>
+          <select id="lattice-type">
+            <option value="none">Empty Unit Cell</option>
+            <option value="sc">Simple Cubic (SC)</option>
+            <option value="bcc">Body-Centered Cubic (BCC)</option>
+            <option value="fcc">Face-Centered Cubic (FCC)</option>
+          </select>
+        </div>
+
+        <div class="control-group toggle-group">
+          <label for="toggle-atoms">Show Atoms</label>
+          <input type="checkbox" id="toggle-atoms" checked>
+        </div>
+
+        <div class="control-group toggle-group">
+          <label for="toggle-sweep">Plane Sweep Animation</label>
+          <input type="checkbox" id="toggle-sweep">
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Application Logic -->
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

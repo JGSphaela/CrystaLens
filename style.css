@@ -438,6 +438,7 @@ input[type="checkbox"]:checked::before {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
+    padding-bottom: 60px;
   }
 
   #controls-container.collapsed-mobile {

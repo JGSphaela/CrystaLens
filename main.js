@@ -131,13 +131,25 @@ function drawUnitCell() {
   tickLabelZ.userData.isStatic = true;
   crystalGroup.add(tickLabelZ);
 
-  // 2. Draw Unit Cell Box
+  // 2. Draw Unit Cell Box (omitting the 3 edges that overlap with axes to prevent z-fighting)
   const a = 1;
-  const boxGeom = new THREE.BoxGeometry(a, a, a);
-  const edges = new THREE.EdgesGeometry(boxGeom);
+  const boxPts = [];
+  // Bottom face (z=0), omitting x and y axes
+  boxPts.push(new THREE.Vector3(a, 0, 0), new THREE.Vector3(a, a, 0));
+  boxPts.push(new THREE.Vector3(a, a, 0), new THREE.Vector3(0, a, 0));
+  // Top face (z=a)
+  boxPts.push(new THREE.Vector3(0, 0, a), new THREE.Vector3(a, 0, a));
+  boxPts.push(new THREE.Vector3(a, 0, a), new THREE.Vector3(a, a, a));
+  boxPts.push(new THREE.Vector3(a, a, a), new THREE.Vector3(0, a, a));
+  boxPts.push(new THREE.Vector3(0, a, a), new THREE.Vector3(0, 0, a));
+  // Vertical edges, omitting z axis
+  boxPts.push(new THREE.Vector3(a, 0, 0), new THREE.Vector3(a, 0, a));
+  boxPts.push(new THREE.Vector3(a, a, 0), new THREE.Vector3(a, a, a));
+  boxPts.push(new THREE.Vector3(0, a, 0), new THREE.Vector3(0, a, a));
+
+  const edgesGeom = new THREE.BufferGeometry().setFromPoints(boxPts);
   const lineMat = new THREE.LineBasicMaterial({ color: 0x445566, linewidth: 2 });
-  const boxLines = new THREE.LineSegments(edges, lineMat);
-  boxLines.position.set(a/2, a/2, a/2);
+  const boxLines = new THREE.LineSegments(edgesGeom, lineMat);
   boxLines.userData.isStatic = true;
   crystalGroup.add(boxLines);
 }

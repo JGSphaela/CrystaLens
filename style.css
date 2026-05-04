@@ -84,6 +84,19 @@ header {
   flex-direction: column;
 }
 
+.logo-area {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.brand-suffix {
+  font-size: 14px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
 .top-right-controls {
   position: absolute;
   top: 24px;
